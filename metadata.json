@@ -1,0 +1,5 @@
+{
+  "name": "QuizGenius",
+  "description": "An AI-powered instant quiz generator. Paste any text, documentation, or notes, and instantly generate a playable interactive quiz using Gemini 2.5 Flash.",
+  "requestFramePermissions": []
+}
