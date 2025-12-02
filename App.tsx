@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useNavigate, useParams, Link, useLocation } from 'react-router-dom';
-import { BrainCircuit, BookOpen, PlusCircle, History } from 'lucide-react';
+import { HashRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import { QuizGenerator } from './components/QuizGenerator';
 import { QuizList } from './components/QuizList';
 import { QuizPlayer } from './components/QuizPlayer';
 import { QuizHistory } from './components/QuizHistory';
 import { Quiz } from './types';
 import { getQuizById } from './services/storage';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
 // Wrapper component to handle fetching quiz by ID from URL
 const QuizPlayerRoute = () => {
@@ -55,65 +56,7 @@ const QuizPlayerRoute = () => {
 };
 
 // Navigation Component
-const NavBar = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const currentPath = location.pathname;
 
-  return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
-      <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-        <div 
-          className="flex items-center gap-2 cursor-pointer" 
-          onClick={() => navigate('/')}
-        >
-          <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
-            <BrainCircuit className="w-5 h-5" />
-          </div>
-          <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">
-            QuizGenius
-          </h1>
-        </div>
-
-        <nav className="flex items-center gap-1">
-          <Link
-            to="/"
-            className={`p-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors ${
-              currentPath === '/' 
-                ? 'bg-slate-100 text-slate-900' 
-                : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
-            }`}
-          >
-            <BookOpen className="w-4 h-4" />
-            <span className="hidden sm:inline">Library</span>
-          </Link>
-          <Link
-            to="/history"
-            className={`p-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors ${
-              currentPath === '/history' 
-                ? 'bg-slate-100 text-slate-900' 
-                : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
-            }`}
-          >
-            <History className="w-4 h-4" />
-            <span className="hidden sm:inline">History</span>
-          </Link>
-          <Link
-            to="/create"
-            className={`p-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors ${
-              currentPath === '/create' 
-                ? 'bg-indigo-50 text-indigo-700' 
-                : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
-            }`}
-          >
-            <PlusCircle className="w-4 h-4" />
-            <span className="hidden sm:inline">Create</span>
-          </Link>
-        </nav>
-      </div>
-    </header>
-  );
-};
 
 function App() {
   return (
@@ -129,13 +72,8 @@ function App() {
           </Routes>
         </main>
         
-        {/* Footer */}
-        <footer className="bg-white border-t border-slate-200 py-6">
-          <div className="max-w-5xl mx-auto px-4 text-center text-slate-400 text-sm">
-            <p>© {new Date().getFullYear()} QuizGenius. Built for Hackathons.</p>
-            <p className="mt-1 text-xs">Powered by Google Gemini 2.5 Flash</p>
-          </div>
-        </footer>
+        
+        <Footer/>
       </div>
     </Router>
   );
